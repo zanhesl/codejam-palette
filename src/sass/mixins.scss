@@ -1,0 +1,14 @@
+@mixin flex($justifyCont: space-between, $direction: row) {
+  display: flex;
+  justify-content: $justifyCont;
+  flex-direction: $direction;
+}
+
+@mixin testBorder {
+  border: 1px dashed red;
+}
+
+@mixin zeroPaddings {
+  margin: 0;
+  padding: 0;
+}

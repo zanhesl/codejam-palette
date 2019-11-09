@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./css/style.min.css">
+    <title></title>
+  </head>
+  <body>
+    <header class="main-header">
+      <button type="button" class="menu-button">
+        <img src="./src/assets/img/menu.png" alt="menu">
+      </button>
+      <h1>CodeJam-Canvas</h1>
+    </header>
+    <main>
+      <div class="tools">
+        <button type="button" class="fill">
+          <img src="./src/assets/img/fill-icon.png" alt="Fill">
+          <p>Fill(F)</p>
+        </button>
+        <button type="button" class="color">
+          <img src="./src/assets/img/change-color-icon-3.png" alt="Color">
+          <p>Color(C)</p>
+        </button>
+        <button type="button" class="move">
+          <img src="./src/assets/img/move.png" alt="Move">
+          <p>Move(M)</p>
+        </button>
+        <button type="button" class="transform">
+          <img src="./src/assets/img/transform.png" alt="Transform">
+          <p>Transform(T)</p>
+        </button>
+      </div>
+
+      <div class="colors-palette">
+        <button type="button" class="current-color">
+          <div class="current-color__color"></div>
+          <p>Current Color</p>
+        </button>
+        <button type="button" class="previous-color">
+          <div class="current-color__color"></div>
+          <p>Previous Color</p>
+        </button>
+        <button type="button" class="color-selected-1">
+          <div class="current-color__color"></div>
+          <p>Red</p>
+        </button>
+        <button type="button" class="color-selected-2">
+          <div class="current-color__color"></div>
+          <p>Blue</p>
+        </button>
+      </div>
+
+      <div class="canvas-container">
+        <canvas id="canvas-main" width="512" height="512" class="canvas-main"></canvas>
+      </div>
+
+
+      <div class="resize-canvas">
+        <button type="button" class="option-4x4">
+          4x4
+        </button>
+        <button type="button" class="option-32x32">
+          32x32
+        </button>
+        <button type="button" class="option-256x256">
+          256x256
+        </button>
+      </div>
+    </main>
+
+    <img src="./data/image.png" alt="source" class="source-image">
+    <script src="./js/main.js"></script>
+  </body>
+</html>
