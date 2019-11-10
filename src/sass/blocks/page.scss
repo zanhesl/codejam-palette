@@ -23,15 +23,15 @@ div {
   border: none;
   padding: 0;
   border-radius: 2px;
-}
 
-.menu-button:hover {
-  background-color: #DCDCDC;
-}
+  &:hover {
+    background-color: #DCDCDC;
+  }
 
-.menu-button:active {
-  background-color: #C0C0C0;
-  color: black;
+  &:active {
+    background-color: #C0C0C0;
+    color: black;
+  }
 }
 
 .menu-button img {
@@ -45,20 +45,20 @@ div {
   background-color: white;
   border: none;
   border-bottom: 1px solid #DCDCDC;
+
+  &:hover {
+    background-color: #DCDCDC;
+  }
+
+  &:active {
+    background-color: #C0C0C0;
+    color: black;
+  }
 }
 
 .tools button img {
   width: 20px;
   padding: 0 10px;
-}
-
-.tools button:hover, .colors-palette button:hover, .resize-canvas button:hover {
-  background-color: #DCDCDC;
-}
-
-.tools button:active, .colors-palette button:active, .resize-canvas button:active {
-  background-color: #C0C0C0;
-  color: black;
 }
 
 .tools {
@@ -68,6 +68,10 @@ div {
   top: 20%;
   left: 5%;
   box-shadow: 11px 12px 15px -15px rgba(94, 94, 94, 1);
+
+  & .selected {
+    background-color: #DCDCDC;
+  }
 }
 
 .colors-palette {
@@ -126,5 +130,6 @@ div {
 
 #canvas-main {
   margin: auto;
+  transform: scale(128);
   image-rendering: pixelated;
 }
