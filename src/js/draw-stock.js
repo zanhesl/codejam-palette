@@ -1,6 +1,8 @@
-import { image4x4 } from './images';
+import {
+  image4x4
+} from './images';
 
-const PIXEL_SIZE = 1;
+const PIXEL_SIZE = 128;
 
 function drawStock() {
   const canvas = document.querySelector('.canvas-main');
@@ -11,7 +13,7 @@ function drawStock() {
     for (let i = 0; i < image.length; i += 1) {
       for (let j = 0; j < image[0].length; j += 1) {
         ctx.fillStyle = `#${image[i][j]}`;
-        ctx.fillRect(j, i, PIXEL_SIZE, PIXEL_SIZE);
+        ctx.fillRect(j * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
       }
     }
   }
@@ -21,4 +23,4 @@ function drawStock() {
   });
 }
 
-export default drawStock();
+export default drawStock;

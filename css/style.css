@@ -102,7 +102,6 @@ div {
 
 #canvas-main {
   margin: auto;
-  transform: scale(128);
   -ms-interpolation-mode: nearest-neighbor;
       image-rendering: -moz-crisp-edges;
       image-rendering: pixelated; }
