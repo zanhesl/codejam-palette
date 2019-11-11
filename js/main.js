@@ -77,12 +77,12 @@
     });
   }
 
+  function calculateCord(cord, pixelSize, mathError) {
+    return Math.round(cord / pixelSize - mathError);
+  }
+
   const PIXEL_SIZE$1 = 128;
   const MATH_ERROR = 0.5;
-
-  function calculateCord(cord) {
-    return Math.round(cord / PIXEL_SIZE$1 - MATH_ERROR);
-  }
 
   function penDraw() {
     const canvas = document.querySelector('.canvas-main');
@@ -92,7 +92,8 @@
 
     function draw(evt) {
       if ((!isDrawing) || (document.querySelector('.selected').classList[0] !== 'pencil')) return;
-      ctx.fillRect(calculateCord(evt.offsetX), calculateCord(evt.offsetY), 1, 1);
+      ctx.fillRect(calculateCord(evt.offsetX, PIXEL_SIZE$1, MATH_ERROR),
+        calculateCord(evt.offsetY, PIXEL_SIZE$1, MATH_ERROR), 1, 1);
     }
 
     canvas.addEventListener('mousedown', (evt) => {
@@ -185,11 +186,6 @@
   const PIXEL_SIZE$3 = 128;
   const MATH_ERROR$2 = 0.5;
 
-  function calculateCord$2(cord) {
-    return Math.round(cord / PIXEL_SIZE$3 - MATH_ERROR$2);
-  }
-
-
   const canvas = document.querySelector('.canvas-main');
   const ctx = canvas.getContext('2d');
 
@@ -204,7 +200,7 @@
         if ((x >= 0) && (x < CANVAS_SIZE)
             && (y >= 0) && (y < CANVAS_SIZE)
             && (JSON.stringify(ctx.getImageData(x, y, 1, 1).data) == JSON.stringify(targetColor))
-          && (!drawn.some((p) => p.x == x && p.y == y))) {
+            && (!drawn.some((p) => p.x == x && p.y == y))) {
           drawn.push({ x, y, color: targetColor });
           ctx.fillStyle = fillColor;
           ctx.fillRect(x, y, 1, 1);
@@ -217,9 +213,9 @@
   function fillFunction() {
     canvas.addEventListener('click', (evt) => {
       if (document.querySelector('.selected').classList[0] === 'fill') {
-        const colorData = ctx.getImageData(calculateCord$2(evt.offsetX), calculateCord$2(evt.offsetY), 1, 1).data;
+        const colorData = ctx.getImageData(calculateCord(evt.offsetX, PIXEL_SIZE$3, MATH_ERROR$2), calculateCord(evt.offsetY, PIXEL_SIZE$3, MATH_ERROR$2), 1, 1).data;
         const fillCol = document.querySelector('.current-color').value;
-        fill({ x: calculateCord$2(evt.offsetX), y: calculateCord$2(evt.offsetY) }, colorData, fillCol);
+        fill({ x: calculateCord(evt.offsetX, PIXEL_SIZE$3, MATH_ERROR$2), y: calculateCord(evt.offsetY, PIXEL_SIZE$3, MATH_ERROR$2) }, colorData, fillCol);
       }
     });
   }
