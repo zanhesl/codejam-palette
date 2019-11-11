@@ -14,6 +14,8 @@ const tinypng = require('gulp-tinypng-compress');
 const svgmin = require('gulp-svgmin');
 const rollup = require('gulp-better-rollup');
 const sourcemaps = require('gulp-sourcemaps');
+const mocha = require('gulp-mocha');
+const commonjs = require('rollup-plugin-commonjs');
 
 gulp.task('style', () => gulp.src('src/sass/style.scss')
   .pipe(plumber())
@@ -93,6 +95,18 @@ gulp.task('imagemin', gulp.series(() => gulp.src('./img/**/*.{jpg,png,jpeg,gif}'
 
 
 gulp.task('clean', () => del(['css', 'fonts', 'img', 'js', '*.html']));
+
+gulp.task('test', () => gulp
+  .src(['src/js/**/*.test.js'])
+	  .pipe(rollup({
+    plugins: [
+      commonjs(), // Сообщает Rollup, что модули можно загружать из node_modules
+    ],
+  }, 'cjs')) // Выходной формат тестов — `CommonJS` модуль
+  .pipe(gulp.dest('build/test'))
+  .pipe(mocha({
+    reporter: 'spec', // Вид в котором я хочу отображать результаты тестирования
+  })));
 
 gulp.task('reload', (done) => {
   server.reload();
