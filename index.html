@@ -34,26 +34,30 @@
       </div>
 
       <div class="colors-palette">
-        <button type="button" class="current-color">
-          <div class="current-color__color"></div>
+        <label class="current-color-label">
+          <div class="color-circle"></div>
+          <input type="color" id="current-color" class="color-select current-color">
           <p>Current Color</p>
-        </button>
-        <button type="button" class="previous-color">
-          <div class="current-color__color"></div>
+        </label>
+        <label class="previous-color-label">
+          <div class="color-circle"></div>
+          <input type="color" id="previous-color" class="color-select previous-color" disabled>
           <p>Previous Color</p>
-        </button>
-        <button type="button" class="color-selected-1">
-          <div class="current-color__color"></div>
+        </label>
+        <label class="color-selected-1-label">
+          <div class="color-circle"></div>
+          <input type="color" id="color-selected-1" class="color-select color-selected-1" value="#FF0000" disabled>
           <p>Red</p>
-        </button>
-        <button type="button" class="color-selected-2">
-          <div class="current-color__color"></div>
+        </label>
+        <label class="color-selected-2-label">
+          <div class="color-circle"></div>
+          <input type="color" id="color-selected-2" class="color-select color-selected-2" value="#0000FF" disabled>
           <p>Blue</p>
-        </button>
+        </label>
       </div>
 
       <div class="canvas-container">
-        <canvas id="canvas-main" width="4" height="4" class="canvas-main"></canvas>
+        <canvas id="canvas-main" width="512" height="512" class="canvas-main"></canvas>
       </div>
 
 

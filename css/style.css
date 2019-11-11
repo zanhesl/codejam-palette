@@ -27,16 +27,16 @@ div {
 .menu-button img {
   width: 30px; }
 
-.tools button, .colors-palette button, .resize-canvas button {
+.tools button, .colors-palette label, .resize-canvas button {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: white;
   border: none;
   border-bottom: 1px solid #DCDCDC; }
-  .tools button:hover, .colors-palette button:hover, .resize-canvas button:hover {
+  .tools button:hover, .colors-palette label:hover, .resize-canvas button:hover {
     background-color: #DCDCDC; }
-  .tools button:active, .colors-palette button:active, .resize-canvas button:active {
+  .tools button:active, .colors-palette label:active, .resize-canvas button:active {
     background-color: #C0C0C0;
     color: black; }
 
@@ -61,19 +61,20 @@ div {
   top: 65%;
   left: 5%;
   box-shadow: 11px 12px 15px -15px #5e5e5e; }
+  .colors-palette label {
+    position: relative;
+    padding: 5px 30px; }
 
-.colors-palette .current-color__color {
+.color-circle {
+  position: absolute;
   width: 20px;
   height: 20px;
-  margin: 0 10px;
   border: 1px solid black;
-  border-radius: 50%; }
+  border-radius: 50%;
+  left: 0px; }
 
-.color-selected-1 .current-color__color {
-  background-color: red; }
-
-.color-selected-2 .current-color__color {
-  background-color: blue; }
+.color-select {
+  display: none; }
 
 .resize-canvas {
   display: flex;
@@ -102,7 +103,6 @@ div {
 
 #canvas-main {
   margin: auto;
-  transform: scale(128);
   -ms-interpolation-mode: nearest-neighbor;
-      image-rendering: -moz-crisp-edges;
-      image-rendering: pixelated; }
+      image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges; }
