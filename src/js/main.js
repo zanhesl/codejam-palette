@@ -19,10 +19,8 @@ const image = document.querySelector('.source-image');
 image.src = localStorage.getItem('img');
 
 ctx.drawImage(image, 0, 0, 511, 511);
-document.querySelector('body').appendChild(image);
 
 
 document.addEventListener('click', () => {
   localStorage.setItem('img', canvas.toDataURL());
-  console.log(localStorage.getItem('img'));
 });
