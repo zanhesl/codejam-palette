@@ -1,6 +1,6 @@
 import { image4x4 } from './images';
 
-const PIXEL_SIZE = 128;
+const PIXEL_SIZE = 1;
 
 function drawStock() {
   const canvas = document.querySelector('.canvas-main');

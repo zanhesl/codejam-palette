@@ -8,7 +8,7 @@
     ['00BCD4', 'FFEB3B', 'FFEB3B', '00BCD4'],
   ];
 
-  const PIXEL_SIZE = 128;
+  const PIXEL_SIZE = 1;
 
   function drawStock() {
     const canvas = document.querySelector('.canvas-main');
@@ -81,7 +81,7 @@
   const MATH_ERROR = 0.5;
 
   function calculateCord(cord) {
-    return Math.round(cord / PIXEL_SIZE$1 - MATH_ERROR) * PIXEL_SIZE$1;
+    return Math.round(cord / PIXEL_SIZE$1 - MATH_ERROR);
   }
 
   function penDraw() {
@@ -92,7 +92,7 @@
 
     function draw(evt) {
       if ((!isDrawing) || (document.querySelector('.selected').classList[0] !== 'pencil')) return;
-      ctx.fillRect(calculateCord(evt.offsetX), calculateCord(evt.offsetY), PIXEL_SIZE$1, PIXEL_SIZE$1);
+      ctx.fillRect(calculateCord(evt.offsetX), calculateCord(evt.offsetY), 1, 1);
     }
 
     canvas.addEventListener('mousedown', (evt) => {
@@ -116,12 +116,19 @@
     canvas.addEventListener('mousemove', draw);
   }
 
+  const PIXEL_SIZE$2 = 128;
+  const MATH_ERROR$1 = 0.5;
+
   function updateColors() {
     const colorInputs = document.querySelectorAll('.color-select');
     for (const color of colorInputs) {
       const parent = color.classList[1];
       document.querySelector(`.${parent}-label .color-circle`).style['background-color'] = color.value;
     }
+  }
+
+  function calculateCord$1(cord) {
+    return Math.round(cord / PIXEL_SIZE$2 - MATH_ERROR$1);
   }
 
   function toHex(n) {
@@ -163,7 +170,7 @@
 
     canvas.addEventListener('click', (evt) => {
       if (document.querySelector('.selected').classList[0] === 'color') {
-        const imgData = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1).data;
+        const imgData = ctx.getImageData(calculateCord$1(evt.offsetX), calculateCord$1(evt.offsetY), 1, 1).data;
         const newColor = rgbToHex(imgData);
         if (newColor.toUpperCase() !== currentColor.value.toUpperCase()) {
           previousColor.value = currentColor.value;
@@ -220,11 +227,19 @@
   // loadImage.saveImage();
   const canvas$1 = document.querySelector('.canvas-main');
   const ctx$1 = canvas$1.getContext('2d');
-  const image = document.querySelector('.source-image');
 
+  canvas$1.width = 4;
+  canvas$1.height = 4;
+
+  const image = document.querySelector('.source-image');
   image.src = localStorage.getItem('img');
 
-  ctx$1.drawImage(image, 0, 0, 511, 511);
+  // const imgDefault = localStorage.getItem('img');
+  // const imgNode = new Image();
+  // imgNode.src = imgDefault;
+  image.addEventListener('load', () => {
+    ctx$1.drawImage(image, 0, 0, 4, 4);
+  });
 
 
   document.addEventListener('click', () => {

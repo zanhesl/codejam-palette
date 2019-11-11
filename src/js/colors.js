@@ -1,4 +1,5 @@
-import changeTools from './change-tools';
+const PIXEL_SIZE = 128;
+const MATH_ERROR = 0.5;
 
 function updateColors() {
   const colorInputs = document.querySelectorAll('.color-select');
@@ -6,6 +7,10 @@ function updateColors() {
     const parent = color.classList[1];
     document.querySelector(`.${parent}-label .color-circle`).style['background-color'] = color.value;
   }
+}
+
+function calculateCord(cord) {
+  return Math.round(cord / PIXEL_SIZE - MATH_ERROR);
 }
 
 function toHex(n) {
@@ -47,7 +52,7 @@ function changeColors() {
 
   canvas.addEventListener('click', (evt) => {
     if (document.querySelector('.selected').classList[0] === 'color') {
-      const imgData = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1).data;
+      const imgData = ctx.getImageData(calculateCord(evt.offsetX), calculateCord(evt.offsetY), 1, 1).data;
       const newColor = rgbToHex(imgData);
       if (newColor.toUpperCase() !== currentColor.value.toUpperCase()) {
         previousColor.value = currentColor.value;
