@@ -1,6 +1,4 @@
-import {
-  image4x4
-} from './images';
+import { image4x4 } from './images';
 
 const PIXEL_SIZE = 128;
 
