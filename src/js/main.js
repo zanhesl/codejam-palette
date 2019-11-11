@@ -14,11 +14,19 @@ fillFunction();
 // loadImage.saveImage();
 const canvas = document.querySelector('.canvas-main');
 const ctx = canvas.getContext('2d');
-const image = document.querySelector('.source-image');
 
+canvas.width = 4;
+canvas.height = 4;
+
+const image = document.querySelector('.source-image');
 image.src = localStorage.getItem('img');
 
-ctx.drawImage(image, 0, 0, 511, 511);
+// const imgDefault = localStorage.getItem('img');
+// const imgNode = new Image();
+// imgNode.src = imgDefault;
+image.addEventListener('load', () => {
+  ctx.drawImage(image, 0, 0, 4, 4);
+});
 
 
 document.addEventListener('click', () => {

@@ -105,4 +105,6 @@ div {
   margin: auto;
   -ms-interpolation-mode: nearest-neighbor;
       image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges; }
+  image-rendering: -moz-crisp-edges;
+  width: 512px;
+  height: 512px; }

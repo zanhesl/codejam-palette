@@ -1,9 +1,7 @@
+import calculateCord from './calculate-coordinates';
+
 const PIXEL_SIZE = 128;
 const MATH_ERROR = 0.5;
-
-function calculateCord(cord) {
-  return Math.round(cord / PIXEL_SIZE - MATH_ERROR) * PIXEL_SIZE;
-}
 
 function penDraw() {
   const canvas = document.querySelector('.canvas-main');
@@ -13,7 +11,8 @@ function penDraw() {
 
   function draw(evt) {
     if ((!isDrawing) || (document.querySelector('.selected').classList[0] !== 'pencil')) return;
-    ctx.fillRect(calculateCord(evt.offsetX), calculateCord(evt.offsetY), PIXEL_SIZE, PIXEL_SIZE);
+    ctx.fillRect(calculateCord(evt.offsetX, PIXEL_SIZE, MATH_ERROR),
+      calculateCord(evt.offsetY, PIXEL_SIZE, MATH_ERROR), 1, 1);
   }
 
   canvas.addEventListener('mousedown', (evt) => {

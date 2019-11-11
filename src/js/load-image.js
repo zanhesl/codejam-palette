@@ -2,7 +2,6 @@ const canvas = document.querySelector('.canvas-main');
 const ctx = canvas.getContext('2d');
 
 function loadImage() {
-  debugger
   const imgDefault = localStorage.getItem('img');
   const imgNode = new Image();
   imgNode.src = imgDefault;
@@ -12,7 +11,6 @@ function loadImage() {
 function saveImage() {
   document.addEventListener('click', () => {
     localStorage.setItem('img', canvas.toDataURL());
-    console.log(localStorage.getItem('img'));
   });
 }
 

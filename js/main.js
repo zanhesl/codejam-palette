@@ -8,7 +8,7 @@
     ['00BCD4', 'FFEB3B', 'FFEB3B', '00BCD4'],
   ];
 
-  const PIXEL_SIZE = 128;
+  const PIXEL_SIZE = 1;
 
   function drawStock() {
     const canvas = document.querySelector('.canvas-main');
@@ -77,12 +77,12 @@
     });
   }
 
+  function calculateCord(cord, pixelSize, mathError) {
+    return Math.round(cord / pixelSize - mathError);
+  }
+
   const PIXEL_SIZE$1 = 128;
   const MATH_ERROR = 0.5;
-
-  function calculateCord(cord) {
-    return Math.round(cord / PIXEL_SIZE$1 - MATH_ERROR) * PIXEL_SIZE$1;
-  }
 
   function penDraw() {
     const canvas = document.querySelector('.canvas-main');
@@ -92,7 +92,8 @@
 
     function draw(evt) {
       if ((!isDrawing) || (document.querySelector('.selected').classList[0] !== 'pencil')) return;
-      ctx.fillRect(calculateCord(evt.offsetX), calculateCord(evt.offsetY), PIXEL_SIZE$1, PIXEL_SIZE$1);
+      ctx.fillRect(calculateCord(evt.offsetX, PIXEL_SIZE$1, MATH_ERROR),
+        calculateCord(evt.offsetY, PIXEL_SIZE$1, MATH_ERROR), 1, 1);
     }
 
     canvas.addEventListener('mousedown', (evt) => {
@@ -116,12 +117,19 @@
     canvas.addEventListener('mousemove', draw);
   }
 
+  const PIXEL_SIZE$2 = 128;
+  const MATH_ERROR$1 = 0.5;
+
   function updateColors() {
     const colorInputs = document.querySelectorAll('.color-select');
     for (const color of colorInputs) {
       const parent = color.classList[1];
       document.querySelector(`.${parent}-label .color-circle`).style['background-color'] = color.value;
     }
+  }
+
+  function calculateCord$1(cord) {
+    return Math.round(cord / PIXEL_SIZE$2 - MATH_ERROR$1);
   }
 
   function toHex(n) {
@@ -163,7 +171,7 @@
 
     canvas.addEventListener('click', (evt) => {
       if (document.querySelector('.selected').classList[0] === 'color') {
-        const imgData = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1).data;
+        const imgData = ctx.getImageData(calculateCord$1(evt.offsetX), calculateCord$1(evt.offsetY), 1, 1).data;
         const newColor = rgbToHex(imgData);
         if (newColor.toUpperCase() !== currentColor.value.toUpperCase()) {
           previousColor.value = currentColor.value;
@@ -174,7 +182,9 @@
     });
   }
 
-  const CANVAS_SIZE = 512;
+  const CANVAS_SIZE = 4;
+  const PIXEL_SIZE$3 = 128;
+  const MATH_ERROR$2 = 0.5;
 
   const canvas = document.querySelector('.canvas-main');
   const ctx = canvas.getContext('2d');
@@ -183,30 +193,29 @@
 
   function fill({ x, y }, targetColor, fillColor) {
     const drawn = [{ x, y, color: targetColor }];
-    for (let done = 0; done < 4; done += 1) {
+    for (let done = 0; done < drawn.length; done += 1) {
       for (const { dx, dy } of around) {
         const x = drawn[done].x + dx;
         const y = drawn[done].y + dy;
         if ((x >= 0) && (x < CANVAS_SIZE)
             && (y >= 0) && (y < CANVAS_SIZE)
-            && (JSON.stringify(ctx.getImageData(x, y, 1, 1).data) == JSON.stringify(targetColor)) &&
-          (!drawn.some(p => p.x == x && p.y == y))) {
-          drawn.push({ x: x, y: y, color: targetColor });
+            && (JSON.stringify(ctx.getImageData(x, y, 1, 1).data) == JSON.stringify(targetColor))
+            && (!drawn.some((p) => p.x == x && p.y == y))) {
+          drawn.push({ x, y, color: targetColor });
           ctx.fillStyle = fillColor;
           ctx.fillRect(x, y, 1, 1);
-          console.log(drawn);
         }
       }
     }
-
+    ctx.fillRect(x, y, 1, 1);
   }
 
   function fillFunction() {
     canvas.addEventListener('click', (evt) => {
       if (document.querySelector('.selected').classList[0] === 'fill') {
-        const colorData = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1).data;
+        const colorData = ctx.getImageData(calculateCord(evt.offsetX, PIXEL_SIZE$3, MATH_ERROR$2), calculateCord(evt.offsetY, PIXEL_SIZE$3, MATH_ERROR$2), 1, 1).data;
         const fillCol = document.querySelector('.current-color').value;
-        fill({ x: evt.offsetX, y: evt.offsetY }, colorData, fillCol);
+        fill({ x: calculateCord(evt.offsetX, PIXEL_SIZE$3, MATH_ERROR$2), y: calculateCord(evt.offsetY, PIXEL_SIZE$3, MATH_ERROR$2) }, colorData, fillCol);
       }
     });
   }
@@ -220,11 +229,19 @@
   // loadImage.saveImage();
   const canvas$1 = document.querySelector('.canvas-main');
   const ctx$1 = canvas$1.getContext('2d');
-  const image = document.querySelector('.source-image');
 
+  canvas$1.width = 4;
+  canvas$1.height = 4;
+
+  const image = document.querySelector('.source-image');
   image.src = localStorage.getItem('img');
 
-  ctx$1.drawImage(image, 0, 0, 511, 511);
+  // const imgDefault = localStorage.getItem('img');
+  // const imgNode = new Image();
+  // imgNode.src = imgDefault;
+  image.addEventListener('load', () => {
+    ctx$1.drawImage(image, 0, 0, 4, 4);
+  });
 
 
   document.addEventListener('click', () => {
