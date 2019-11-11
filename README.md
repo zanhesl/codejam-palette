@@ -1,2 +1,7 @@
 # codejam-virtual-keyboard
-Alt+Shif to cange language
+To install dependencies:
+  npm install
+ To start:
+  npm start
+ To test: 
+  npm test
