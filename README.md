@@ -1,12 +1,6 @@
-# codejam-virtual-keyboard
-To install dependencies:
-
+# codejam-palette
+to run:
     npm install
-  
- To start:
- 
     npm start
-  
- To test: 
- 
+to test:
     npm test

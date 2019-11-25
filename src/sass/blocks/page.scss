@@ -38,7 +38,7 @@ div {
   width: 30px;
 }
 
-.tools button, .colors-palette button, .resize-canvas button {
+.tools button, .colors-palette label, .resize-canvas button {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -81,22 +81,31 @@ div {
   top: 65%;
   left: 5%;
   box-shadow: 11px 12px 15px -15px rgba(94, 94, 94, 1);
+
+  & label {
+    position: relative;
+    padding: 5px 30px;
+  }
 }
 
-.colors-palette .current-color__color {
+.color-circle {
+  position: absolute;
   width: 20px;
   height: 20px;
-  margin: 0 10px;
   border: 1px solid black;
   border-radius: 50%;
+  left: 0px;
 }
 
-.color-selected-1 .current-color__color {
-  background-color: red;
-}
-
-.color-selected-2 .current-color__color {
-  background-color: blue;
+// .current-color{
+//   width: 20px;
+//   height: 20px;
+//   margin: 0 10px;
+//   border: 1px solid black;
+//   border-radius: 50%;
+// }
+.color-select {
+  display: none;
 }
 
 .resize-canvas {
@@ -130,6 +139,8 @@ div {
 
 #canvas-main {
   margin: auto;
-  transform: scale(128);
   image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  width: 512px;
+  height: 512px;
 }
